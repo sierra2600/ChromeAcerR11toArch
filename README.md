@@ -1,5 +1,5 @@
 # ChromeAcerR11toArch
-1234567890123456789012345678901234567890
+|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\
 
 Chromebook R11 (CYAN / CB5-132T) - Arch
 Linux Install Scripts
