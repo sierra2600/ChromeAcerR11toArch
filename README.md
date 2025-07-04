@@ -17,4 +17,4 @@ may have the same level of rustration
 and not enough time in the world to do
 all of this typing
 
-|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\ <-- (What is this? look into the code and you'll see it's my 40 column text keeper)
+|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\ <-- (What is this? look into the code and you'll see it's my 40 column text keeper for low resresolutions)
