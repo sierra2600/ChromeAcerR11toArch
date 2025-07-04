@@ -37,7 +37,9 @@ for copy an paste at the moment)
 
 instll2.sh is coming as soon as I stop
 loosing my frustration with KDE pushing
-the still very broken 
+the still very broken wayland
+environment and causing my audio not to
+work at all
 
 
 Based off of the guide from Sudaraka
