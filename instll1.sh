@@ -1,7 +1,8 @@
 
 echo "sgdisk is being used to create the partitions"
+lsblk
 sgdisk -l /dev/mmcblk0
-echo "If No such file or directory appears, there is something wrong"
+echo "If No such file or directory appears, a SD card maybe inserted into the left side of the Chromebook"
 
 echo "!!!WARNING!!! This Chromebook will be erased!"
 dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=1 status=progress
@@ -43,7 +44,7 @@ echo "Turning on the swap partition for use"
 swapon /dev/mmcblk0p2
 
 echo "What is the name of the WIFI device"
-iwctl station list | grep disconnected
+iw dev | awk '$1=="Interface"{print $2}'
 
 echo "Turn on the WIFI"
 iwctl device wlan0 set-property Powered on && iwctl station wlan0 scan && iwctl station wlan0 get-networks
@@ -64,7 +65,7 @@ systemctl start systemd-networkd && systemctl start systemd-resolved
 
 mkdir -pv /var/lib/pacman/sync
 
-pacstrap -K /mnt base linux linux-firmware intel-ucode iwd dhcpcd nfs-utils base-devel nano networkmanager
+pacstrap -K /mnt base linux linux-firmware intel-ucode iwd base-devel nano networkmanager
 
 genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
