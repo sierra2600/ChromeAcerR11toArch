@@ -1,11 +1,11 @@
+echo "You are going to want to make sure there is not a SD card inserted in to the computer"
 
 echo "sgdisk is being used to create the partitions"
 lsblk
 sgdisk -l /dev/mmcblk0
-echo "If No such file or directory appears, a SD card maybe inserted into the left side of the Chromebook"
 
-echo "!!!WARNING!!! This Chromebook will be erased!"
-dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=1 status=progress
+#echo "!!!WARNING!!! This Chromebook will be erased!"
+#dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=1 status=progress
 
 echo "Creating UEFI Boot partition... (512MB because of compatibility with the old original EFI standard"
 sgdisk -n 0:0:+524288K -t 0:ef00 /dev/mmcblk0
@@ -40,14 +40,15 @@ mkdir -m 1777 -pv /mnt/tmp
 echo "mountING the UEFI Boot Partiton"
 mount /dev/mmcblk0p1 /mnt/boot
 
-echo "Turning on the swap partition for use"
+echo "Turning swapon"
 swapon /dev/mmcblk0p2
 
+#Much much much editing is needed from here
 echo "What is the name of the WIFI device"
 iw dev | awk '$1=="Interface"{print $2}'
 
-echo "Turn on the WIFI"
-iwctl device wlan0 set-property Powered on && iwctl station wlan0 scan && iwctl station wlan0 get-networks
+echo "Turn on the WIFI if it isn't already"
+iwctl station wlan0 scan && iwctl station wlan0 get-networks
 
 echo "much editing needed here:"
 iwctl station wlan0 connect ESSID
@@ -60,47 +61,49 @@ Name=wlan0
 DHCP=yes
 EOF
 ln -sv /mnt/etc/systemd/network/any-network-name.network /etc/systemd/network
-
-systemctl start systemd-networkd && systemctl start systemd-resolved
+#to here
 
 mkdir -pv /var/lib/pacman/sync
 
-pacstrap -K /mnt base linux linux-firmware intel-ucode iwd base-devel nano networkmanager
+#Using linux-firmware-intel saves space in the disk and RAM, nano for your sanity and NetworkManager because it covers everything (iwd is its assistant for WIFI)
+pacstrap -K /mnt base linux linux-firmware-intel intel-ucode base-devel nano networkmanager iwd
 
+#We use -U since this its best to use a UUID to locate partitions raher than throwing caution to the wind guessing what device and partition mmcblk0p3 really is
 genfstab -U /mnt >> /mnt/etc/fstab
-cat /mnt/etc/fstab
-nano /mnt/etc/fstab # need to add rw,relatime,noatime,nodiratime,discard,errors=remount-ro 0 1
+nano /mnt/etc/fstab #need to add this to mmcblk0p3: rw,relatime,noatime,nodiratime,discard,errors=remount-ro 0 1
 
 mkdir -pv /mnt/boot/{EFI/systemd,loader/entries}
 
 cp /mnt/lib/systemd/boot/efi/systemd-bootx64.efi /mnt/boot/EFI/systemd
 
-nano /mnt/boot/loader/loader.conf
-#default Arch-Linux
-#timeout 2
+cat > /mnt/boot/loader/loader.conf << EOF
+default Arch-Linux
+timeout 2
+EOF
 
-nano /mnt/boot/loader/entries/Arch-Linux.conf
-#title Arch Linux
-#linux /vmlinuz-linux
-#initrd /intel-ucode.img
-#initrd /initramfs-linux.img
-#options root=/dev/mmcblk0p3 init=/usr/lib/systemd/systemd rw
+cat > /mnt/boot/loader/entries/Arch-Linux.conf << EOF
+title Arch Linux
+linux /vmlinuz-linux
+initrd /intel-ucode.img
+initrd /initramfs-linux.img
+options root=/dev/mmcblk0p3 init=/usr/lib/systemd/systemd rw
+EOF
 
 efibootmgr --create --disk /dev/mmcblk0 --part 1 --loader /EFI/systemd/systemd-bootx64.efi --label "Arch Linux"
 
-systemctl enable iwd systemd-networkd systemd-resolved networkmanager
+arch-chroot /mnt
+
+systemctl enable iwd systemd-networkd systemd-resolved NetworkManager
 
 ln -sfv /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 ln -sf /usr/share/zoneinfo/US/Central /etc/localtime
 
-echo "n07chr0m3b00k" > /etc/hostname
-
-nano /etc/locale.gen
-
-locale-gen
-
 echo "US/Central" > /etc/timezone
+
+echo "n07AChr0m3b00k" > /etc/hostname
+
+sed -i 's/^#\(en_US.UTF-8.\+\)/\1/' /etc/locale.gen && cat /etc/locale.gen | grep en_US && locale-gen
 
 hwclock --hctosys --utc
 
@@ -124,4 +127,3 @@ exit
 umount -Rv /mnt
 
 reboot
-
