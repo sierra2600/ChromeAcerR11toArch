@@ -65,7 +65,7 @@ ln -sv /mnt/etc/systemd/network/any-network-name.network /etc/systemd/network
 
 mkdir -pv /var/lib/pacman/sync
 
-#Using linux-firmware-intel saves space in the disk and RAM, nano for your sanity and NetworkManager because it covers everything (iwd is its assistant for WIFI)
+#Using linux-firmware-intel saves space in the disk and RAM, nano for your sanity (we're not using teletypes so vi/m isn't needed) and NetworkManager because it covers everything (iwd is its assistant for WIFI)
 pacstrap -K /mnt base linux linux-firmware-intel intel-ucode base-devel nano networkmanager iwd
 
 #We use -U since this its best to use a UUID to locate partitions raher than throwing caution to the wind guessing what device and partition mmcblk0p3 really is
