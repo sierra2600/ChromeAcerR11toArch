@@ -121,8 +121,10 @@ useradd -m -s /bin/bash -G systemd-journal,wheel -U owner
 
 passwd owner
 
-echo "owner n07chr0m3b00k=(root) /usr/bin/pacman" >> /etc/sudoers
-echo "owner n07chr0m3b00k=(root) /usr/bin/su -ls /usr/bin/bash" >> /etc/sudoers
+cat >> /etc/sudoers << EOF
+owner n07chr0m3b00k=(root) /usr/bin/pacman
+owner n07chr0m3b00k=(root) /usr/bin/su -ls /usr/bin/bash
+EOF
 
 mkinitcpio -P
 
