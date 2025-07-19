@@ -25,5 +25,5 @@ acman -S pipewire-pulse plasma-pa
 #If you want that old windows 7/Vista/xp like look, throw down some themes
 pacman -S oxygen oxygen-sounds
 
-#Make it a little more cozy
-pacman -S dolphin kate
+#Make it a little more cozy and crap on Microshaft Windblows, file manager, notepad, office suite, a better paint
+pacman -S dolphin kate libreoffice-still libreoffice-still-en-gb krita kcalc
