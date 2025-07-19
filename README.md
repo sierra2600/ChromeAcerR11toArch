@@ -53,8 +53,8 @@ will have this maintained but I've been
 getting frustrated with having to
 retype all of the commands and I'm sure
 there are other people out there that
-may have the same level of rustration
+may have the same level of frustration
 and not enough time in the world to do
 all of this typing
 
-|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\ <-- (What is this? look into the code and you'll see it's my 40 column text keeper for low resresolutions)
+DEADBEEFDEADBEEFDEADBEEFDEADBEEFDEADBEEF <-- (What is this? look into the code and you'll see it's my 40 column text keeper for low resresolutions)
