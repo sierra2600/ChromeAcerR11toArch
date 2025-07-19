@@ -35,7 +35,7 @@ folders, setting up the simple
 bootloader (the script is more setup
 for copy an paste at the moment)
 
-instll2.sh is coming as soon as I stop
+PstInstll.sh is coming as soon as I stop
 loosing my frustration with KDE pushing
 the still very broken wayland
 environment and causing my audio not to
