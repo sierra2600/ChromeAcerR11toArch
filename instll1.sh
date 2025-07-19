@@ -76,20 +76,21 @@ mkdir -pv /mnt/boot/{EFI/systemd,loader/entries}
 
 cp /mnt/lib/systemd/boot/efi/systemd-bootx64.efi /mnt/boot/EFI/systemd
 
-cat > /mnt/boot/loader/loader.conf << EOF
-default Arch-Linux
-timeout 2
-EOF
+#I'm never ever using this ever again, even though it takes up the least amount of space, the mmcblk likes to jump between 0 and 1 even when the external SD card is in
+#cat > /mnt/boot/loader/loader.conf << EOF
+#default Arch-Linux
+#timeout 2
+#EOF
 
-cat > /mnt/boot/loader/entries/Arch-Linux.conf << EOF
-title Arch Linux
-linux /vmlinuz-linux
-initrd /intel-ucode.img
-initrd /initramfs-linux.img
-options root=/dev/mmcblk0p3 init=/usr/lib/systemd/systemd rw
-EOF
+#cat > /mnt/boot/loader/entries/Arch-Linux.conf << EOF
+#title Arch Linux
+#linux /vmlinuz-linux
+#initrd /intel-ucode.img
+#initrd /initramfs-linux.img
+#options root=/dev/mmcblk0p3 init=/usr/lib/systemd/systemd rw
+#EOF
 
-efibootmgr --create --disk /dev/mmcblk0 --part 1 --loader /EFI/systemd/systemd-bootx64.efi --label "Arch Linux"
+#efibootmgr --create --disk /dev/mmcblk0 --part 1 --loader /EFI/systemd/systemd-bootx64.efi --label "Arch Linux"
 
 arch-chroot /mnt
 
@@ -110,6 +111,9 @@ hwclock --hctosys --utc
 sed -i 's/^#\(FallbackNTP=.\+\)/\1/' /etc/systemd/timesyncd.conf
 
 systemctl enable systemd-timesyncd
+
+pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB && grub-mkconfig -o /boot/grub/grub.cfg
 
 sed -i 's/#\(Color\|VerbosePkgLists\)/\1/' /etc/pacman.conf
 
