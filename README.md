@@ -35,12 +35,14 @@ folders, setting up the simple
 bootloader (the script is more setup
 for copy an paste at the moment)
 
-PstInstll.sh is coming as soon as I stop
-loosing my frustration with KDE pushing
-the still very broken wayland
-environment and causing my audio not to
-work at all
-
+PstInstll.sh is post install, I am
+getting tired of KDE pushing the still
+very broken Wayland, I need to be able
+to use AnyDesk and RustDesk in
+unattended mode (where someone isn't at
+the laptop/PC to click allow) and I am
+having issues at the moment with not
+getting ANY audio from Discord
 
 Based off of the guide from Sudaraka
 Wijesinghe titled "Chromebook R11
@@ -56,3 +58,4 @@ there are other people out there that
 may have the same level of frustration
 and not enough time in the world to do
 all of this typing
+for low resresolutions)
