@@ -18,7 +18,7 @@ has OpenSSH, if you have a Ethernet to
 USB adapter (or a built in Ethernet
 port) or you go though the rounds of
 connecting to WIFI (which I do not
-recommend at all doing while installing
+recommend AT ALL doing while installing
 anything as corruption can happen, and
 yes even despite checksums being done) 
 you can do 'passwd' and set the root
@@ -56,5 +56,3 @@ there are other people out there that
 may have the same level of frustration
 and not enough time in the world to do
 all of this typing
-
-DEADBEEFDEADBEEFDEADBEEFDEADBEEFDEADBEEF <-- (What is this? look into the code and you'll see it's my 40 column text keeper for low resresolutions)
