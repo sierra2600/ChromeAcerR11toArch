@@ -8,7 +8,7 @@ DOWNLOADING AND USING THEM! THERE IS ONE
 COMMAND THAT IN instll1.sh THAT IS MEANT
 TO ERASE THE STORAGE OF THE CHROMEBOOK
 
-fwscript.sh has the command that needs
+**fwscript.sh** has the command that needs
 to be ran inside of ChromeOS
 
 When you have your DVD or USB drive
@@ -28,14 +28,14 @@ to remote in and install from a
 terminal that you can copy and paste
 into!
 
-instll1.sh WILL ERASE THE CHROMEBOOK!
+**instll1.sh** WILL ERASE THE CHROMEBOOK!
 It has all the commands for creating
 and formatting the partitions, creating
 folders, setting up the simple
 bootloader (the script is more setup
 for copy an paste at the moment)
 
-PstInstll.sh is post install, I am
+**PstInstll.sh** is post install, I am
 getting tired of KDE pushing the still
 very broken Wayland, I need to be able
 to use AnyDesk and RustDesk in
